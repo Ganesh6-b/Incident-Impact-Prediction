@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+    .quotes {
+        color:purple;
+        background-color:linen;
+        opacity: 0.7;    }
+    #inputfile {
+        background-color: lemonchiffon;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size:25px;
+        font-style:italic;
+        padding-left:50px;
+        padding-right:50px;
+        padding-top:20px;
+    }
+    .heads{
+        background-image: url("{% static 'pexels-andrea-piacquadio-845451.jpg' %}");
+        padding-left:50px;
+        padding-right:50px;
+        padding-top:20px;
+    }
+    .intro {
+        background-color: linen;
+
+        padding:10px;
+    }
+    .headsname {
+        padding: 5px;
+        margin-left:30px;
+        text-align: center;
+        background-color: slategrey;
+        color: snow;
+    }
+    .files {
+      background-color: gold;
+      padding:50px;
+    }
+    .result {
+      background-color:powderblue;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-size:30px;
+      font-style:italic;
+      text-align: center;
+      padding:10px;
+    }
+    .sen{
+      margin-top: -17px;
+      text-align: center;
+      background-color: powderblue ;
+    }
+    .last {
+      background-color: grey;
+      color:honeydew;
+      padding:10px;
+      text-align: center;
+    }
+    </style>
+    <title>Service Impact Prediction</title>
+</head>
+<body style = 'background-image: url({% static "pexels-francesco-ungaro-396547.jpg" %});'>
+  <div>
+    {% if impact %}
+    <p class = "result" >Impact is {{impact}}</p>
+    <p class = "sen" >To find another one!!! Go back and Enter the values!!</p>
+    {% endif %}
+  </div>
+    <div class = "heads">
+        <h1 class = "headsname">Incident Impact Prediction</h1>
+    </div>
+
+    <div class = "intro">
+    <p>This effect could be positive: a return on investment or customer satisfaction such as a new feature or improvement to a product. Conversely, it could be very negative based on the degree of damage or cost that results. Loss of revenue, manhours, or customers following IT service downtime or poor performance are all negative effects.</p>
+    <p>Usually, impact would not be expressed in absolute terms, but rather a range or degree that is subject to the interpretation of your company’s context.</p>
+    <p>This range might include:</p>
+    <ul>
+    <li>Number of customers/users affected</li>
+    <li>Amount of lost revenue or incurred costs</li>
+    <li>Number of IT systems/services/elements involved</li>
+    </ul>
+    <p>A variety of terms can help identify the impact, or effect, of an incident:</p>
+    <ul>
+        <li>High</li>
+        <li>Medium</li>
+        <li>Low</li>
+    </ul>
+    <p>Remember that words matter: all involved parties must share the same understanding of the scales you use. Clear, common understanding of the impact scale is the first step in effective prioritizing.</p>
+    </div>
+
+    <div id="demo" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'pexels-fauxels-3183153.jpg' %}" alt="Impact" style="width:100%; height:600px;">
+            
+            <div class="carousel-caption">
+              <h3 class = "quotes">"We don't want to push our ideas on to customers, we simply want to make what they want." </h3>
+            </div>   
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'pexels-andrea-piacquadio-845451.jpg' %}" alt="Service" style="width:100%; height:600px;">
+            <div class="carousel-caption">
+              <h3 class = "quotes">"Instead of focusing on the competition, focus on the customer." </h3>
+            </div>   
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'pexels-negative-space-33999.jpg' %}" alt="Prediction" style=" width:100%; height:600px;">
+            <div class="carousel-caption">
+              <h3 class = "quotes">"Happy customers are your biggest advocates and can become your most successful sales team."</h3>
+            </div>   
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+      </div>
+      <div  id = "inputfile">
+       <p>If your have a file,<br>Submit your csv or excel file to predict the Service Impact:</p>
+       <form action="ImpactPrediction" method = 'POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+          <input class="form-control" type = "file" name="files" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+        <br>
+      </form>
+      </div>
+
+      <div class = "files">
+        <p style = "font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size:25px; font-style:italic;">If you have a values!!! dont worry... Just put it below:</p>
+        <form action="ImpactPredictionValue" method = 'POST'>
+          {% csrf_token %}
+          <div class="form-group">
+            ID :
+            <input class="form-control" type = "number" name="ID" min=0 required>
+          </div>
+          <div class = "form-group">
+            ID Status :
+          <select name="ID_status" class = "form-control">
+            <option value="New">New</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Closed">Closed</option>
+            <option value="Active">Active</option>
+            <option value="Awaiting User Info">Awaiting User Info</option>
+            <option value="Awaiting Problem">Awaiting Problem</option>
+            <option value="Awaiting Vendor">Awaiting Vendor</option>
+            <option value="Awaiting Evidence">AcAwaiting Evidencetive</option>         
+          </select>
+        </div>
+          <div class="form-group">
+            Count Reassign :
+            <input class="form-control" type = "number" name="count_reassign" min = 0 required>
+          </div>
+          <div class="form-group">
+            Count Updated :
+            <input class="form-control" type = "number" name="count_updated" min = 0 required>
+          </div>
+          <div class="form-group">
+            ID Caller :
+            <input class="form-control" type = "number" name="ID_caller" min = 1 required>
+          </div>
+          <div class="form-group">
+            Opened By :
+            <input class="form-control" type = "number" name="opened_by" min = 0 required>
+          </div>
+          <div class="form-group">
+            Created By :
+            <input class="form-control" type = "number" name="Created_by" min = 0 required>
+          </div>
+          <div class="form-group">
+            Updated By :
+            <input class="form-control" type = "number" name="updated_by" min = 0 required>
+          </div>
+          <div class="form-group">
+            Location :
+            <input class="form-control" type = "number" name="location" min = 0 required>
+          </div>
+          <div class="form-group">
+            Category ID :
+            <input class="form-control" type = "number" name="category_ID" min = 0 required>
+          </div>
+          <div class="form-group">
+            User Symptom :
+            <input class="form-control" type = "number" name="user_symptom" min = 0 required>
+          </div>
+          <div class="form-group">
+            Support Group :
+            <input class="form-control" type = "number" name="Support_group" min = 0 required>
+          </div>
+          <div class="form-group">
+            Support Incharge :
+            <input class="form-control" type = "number" name="support_incharge" min = 0 required>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <br>
+        </form>
+        <br>
+
+      </div>
+      <footer class = "last">
+        <p><small>&copy; Copyright 2018, Ganeshivan. All Rights Reserved</small></p>
+      </footer>
+</body>
+</html>
