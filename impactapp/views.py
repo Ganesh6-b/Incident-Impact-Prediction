@@ -80,6 +80,8 @@ def ImpactPrediction(request):
         pred_dict = fin_series.to_dict()
         context = {"pred_dict" : pred_dict}
         return render(request, "result.html", context = context)
+    else:
+        return render(request, "home.html")
 def ImpactPredictionValue(request):  
     if request.method == 'POST':
         ID = int(request.POST['ID'])
