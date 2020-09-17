@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '$8lidf74_ey!9-z6#e(fkx87k#b24e+d_#^=ig#e3$wsy8q_j^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['incidentimpactprediction.herokuapp.com']
 
 
 # Application definition
