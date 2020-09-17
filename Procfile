@@ -1,1 +1,1 @@
-web: gunicorn impactproject.wsgi --timeout 500 --log-file -
+web: gunicorn impactproject.wsgi --timeout 2000 --log-file -
