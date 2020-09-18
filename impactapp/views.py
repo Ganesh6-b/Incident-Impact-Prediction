@@ -17,61 +17,24 @@ def ImpactPrediction(request):
         except:
             df = pd.read_excel(request.FILES['files'], sheet_name=1)
         fin_df = df[['ID', 'ID_status', 'count_reassign', 'count_updated', 'ID_caller','opened_by', 'Created_by', 'updated_by', 'location', 'category_ID','user_symptom', 'Support_group', 'support_incharge']]
-        acbser1 = fin_df['ID']
-        acbser_1 = acbser1.tolist()
-        acbser2 = []
-        for i in range(len(acbser_1)):
-            vg = acbser_1[i]
-            vg_new = vg.strip("INC")
-            acbser2.append(vg_new)
-        fin_df['ID'] = acbser2                           
-        fin_df['ID'] = fin_df['ID'].astype(int)
+        fin_df['ID'] = fin_df['ID'].astype(str).str[3:].astype(int)
+        #Remove the extra part the attributes like "Opened by 8" to "8" for more understanding. do it for all attributes which have like this
+        fin_df['ID_caller'] = fin_df['ID_caller'].astype(str).str[7:].astype(int)
+        fin_df['opened_by'] = fin_df['opened_by'].astype(str).str[10:].astype(int)
+        fin_df['Created_by'] = fin_df['Created_by'].astype(str).str[11:].astype(int)
+        fin_df['updated_by'] = fin_df['updated_by'].astype(str).str[11:].astype(int)
+        fin_df['location'] = fin_df['location'].astype(str).str[9:].astype(int)
+        fin_df['category_ID'] = fin_df['category_ID'].astype(str).str[9:].astype(int)
+        fin_df['user_symptom'] = fin_df['user_symptom'].astype(str).str[8:].astype(int)
+        fin_df['Support_group'] = fin_df['Support_group'].astype(str).str[6:].astype(int)
+        fin_df['support_incharge'] = fin_df['support_incharge'].astype(str).str[9:].astype(int)
 
-        def abcser(m):
-            for col in m:
-                updatser1=[]
-                updatser=fin_df[col]
-                for i in range(len(fin_df[col])):
-                    j = updatser[i]
-                    l = j.split()
-                    r = l[1]
-                    updatser1.append(r)
-                fin_df[col]=updatser1
-        m=['ID_caller','location','category_ID','user_symptom','Support_group','support_incharge']
-        abcser(m)
-        def abser(n):
-            for col in n:
-                updatser1=[]
-                updatser=fin_df[col]
-                for i in range(len(fin_df[col])):
-                    j = updatser[i]
-                    l = j.split()
-                    r = l[2]
-                    updatser1.append(r)
-                fin_df[col]=updatser1
-        n=['opened_by','Created_by','updated_by']
-        abser(n)
-        idstaser=fin_df['ID_status'].unique()
-        idstaser1={}
-        for i in range(9):
-            idstaser1[i]=idstaser[i]
-        idstaser2=fin_df['ID_status']
-        for i in range(len(idstaser2)): 
-            for j in range(9):
-                if idstaser2[i]==idstaser1[j]:
-                    idstaser2[i]=j
+        ID_status_dict = {'New' : 0 , 'Resolved' : 1, 'Closed' : 2, 'Active': 3, 'Awaiting User Info': 4, 'Awaiting Problem' : 5, 'Awaiting Vendor' : 6, 'Awaiting Evidence' : 7, '-100' : 8}
+        fin_df['ID_status'] = fin_df['ID_status'].map(ID_status_dict)
+
         fin_df['ID_status'] = fin_df['ID_status'].astype(int)
         fin_df['count_reassign'] = fin_df['count_reassign'].astype(int)
         fin_df['count_updated'] = fin_df['count_updated'].astype(int)
-        fin_df['ID_caller'] = fin_df['ID_caller'].astype(int)
-        fin_df['opened_by'] = fin_df['opened_by'].astype(int)
-        fin_df['Created_by'] = fin_df['Created_by'].astype(int)
-        fin_df['updated_by'] = fin_df['updated_by'].astype(int)
-        fin_df['location'] = fin_df['location'].astype(int)
-        fin_df['category_ID'] = fin_df['category_ID'].astype(int) 
-        fin_df['user_symptom'] = fin_df['user_symptom'].astype(int)
-        fin_df['Support_group'] = fin_df['Support_group'].astype(int)
-        fin_df['support_incharge'] = fin_df['support_incharge'].astype(int)
         pred_val = np.array(classifier.predict(fin_df))
         Id_val = np.array(fin_df['ID'])
         fin_series = pd.Series(pred_val, index = Id_val)
