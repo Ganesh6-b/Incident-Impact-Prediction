@@ -119,13 +119,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'asserts')
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-import django_heroku
-django_heroku.settings(locals())
+
 import dj_database_url
 prod_db  =  dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(prod_db)
@@ -144,5 +145,5 @@ LOGGING = {
         },
     },
 }
-
-PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
+import django_heroku
+django_heroku.settings(locals())
