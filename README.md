@@ -33,7 +33,7 @@ Explaining the steps which i have performed in this project in a few words.
 
 2) Data Analysis: Dataset is having a 25 independent variable and one dependent variable which is impact feature. By performing various visualizations and analysis, generating more and more insights from the data.
 
-3)Data Preprocessing: By Performing one hot encoding and label encoding and also mean and probability encoding for the catagorical variable's. Based on the performance of the model, the specific encoding process is taken for the final model. 
+3) Data Preprocessing: By Performing one hot encoding and label encoding and also mean and probability encoding for the catagorical variable's. Based on the performance of the model, the specific encoding process is taken for the final model. 
 
 4) Feature Selection: feature selection process is takes place for selecting the specified features suitable for building the model to predict the dependent variable. Various feature selection techniques i have used, such as ExtraTreesClassifier, SelectKModel, Correlation, Mutual info classif and also Univariate Selection.
 
